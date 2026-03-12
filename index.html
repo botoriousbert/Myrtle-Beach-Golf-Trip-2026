@@ -570,6 +570,88 @@ body::before {
   line-height: 1.8;
 }
 
+/* COMPARE AREA HEADERS */
+.compare-area-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  margin-top: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.compare-area-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.compare-area-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* REPLAY ESTIMATES */
+.replay-estimate {
+  border-color: rgba(251, 191, 36, 0.25) !important;
+  background: rgba(251, 191, 36, 0.04) !important;
+}
+
+.replay-estimate .price-amount {
+  color: var(--gold) !important;
+}
+
+.estimate-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--gold);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 1px;
+}
+
+.estimate-text {
+  color: var(--gold) !important;
+  font-style: italic;
+}
+
+.replay-calc-note {
+  margin: 0 28px 24px;
+  padding: 16px 20px;
+  background: rgba(251, 191, 36, 0.04);
+  border: 1px dashed rgba(251, 191, 36, 0.2);
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.replay-calc-note strong {
+  color: var(--gold);
+}
+
+.estimate-disclaimer {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(251, 191, 36, 0.04);
+  border: 1px dashed rgba(251, 191, 36, 0.2);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.estimate-disclaimer strong {
+  color: var(--gold);
+}
+
 /* ANIMATIONS */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -620,7 +702,7 @@ body::before {
     <h1>Myrtle Beach<br>Golf Trip 2026</h1>
     <div class="hero-meta">
       <span><span class="dot"></span> 8 Players</span>
-      <span><span class="dot"></span> Sept 10–13, 2026</span>
+      <span><span class="dot"></span> Sept 9–13, 2026</span>
       <span><span class="dot"></span> 7 Packages Compared</span>
     </div>
   </header>
@@ -725,24 +807,36 @@ body::before {
 
           <div class="pricing-row">
             <div class="price-option selected">
-              <div class="price-label">Per Person (3 rounds)</div>
-              <div class="price-amount">$393.35</div>
+              <div class="price-label">AM Rounds Only (3 rounds)</div>
+              <div class="price-amount">$393.35 <small>/pp</small></div>
               <div class="price-detail">Total: $3,146.80 for 8 players</div>
+            </div>
+            <div class="price-option replay-estimate">
+              <div class="price-label">Est. w/ PM Replays (6 rounds) <span class="estimate-badge">ESTIMATE</span></div>
+              <div class="price-amount">$668.70 <small>/pp</small></div>
+              <div class="price-detail">Total: ~$5,349.56 for 8 players</div>
             </div>
           </div>
 
           <div class="schedule-section">
             <button class="schedule-toggle" onclick="toggleSchedule(this)">
-              <span class="arrow">▶</span> View Schedule
+              <span class="arrow">▶</span> View Schedule & Replay Estimates
             </button>
             <table class="schedule-table">
-              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost</th></tr></thead>
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost (8 ppl)</th><th>Est. Replay</th></tr></thead>
               <tbody>
-                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Caledonia</span></td><td>$1,504</td></tr>
-                <tr><td>Fri 9/11</td><td>9:04 AM</td><td><span class="course-name">Tradition Club</span></td><td>$736</td></tr>
-                <tr><td>Sat 9/12</td><td>9:05 AM</td><td><span class="course-name">Blackmoor</span></td><td>$712</td></tr>
+                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Caledonia</span></td><td>$1,504</td><td class="estimate-text">~$1,052.80</td></tr>
+                <tr><td>Fri 9/11</td><td>9:04 AM</td><td><span class="course-name">Tradition Club</span></td><td>$736</td><td class="estimate-text">~$515.20</td></tr>
+                <tr><td>Sat 9/12</td><td>9:05 AM</td><td><span class="course-name">Blackmoor</span></td><td>$712</td><td class="estimate-text">~$498.40</td></tr>
               </tbody>
+              <tfoot>
+                <tr><td colspan="3" style="text-align:right;font-weight:600;color:var(--text-primary)">Totals:</td><td style="font-weight:600;color:var(--text-primary)">$2,952</td><td class="estimate-text" style="font-weight:600">~$2,066.40</td></tr>
+              </tfoot>
             </table>
+          </div>
+
+          <div class="replay-calc-note">
+            <strong>Replay estimate method:</strong> Each PM replay calculated at 70% of the AM round cost for that course. Caledonia: $1,504 × 0.70 = $1,052.80 · Tradition: $736 × 0.70 = $515.20 · Blackmoor: $712 × 0.70 = $498.40. Estimated replay total: $2,066.40. Combined with taxes/fees proportionally: ~$5,349.56 total / $668.70 per person. Actual replay rates may vary — these are estimates only.
           </div>
 
           <div class="package-details">
@@ -913,31 +1007,43 @@ body::before {
 
           <div class="pricing-row">
             <div class="price-option selected">
-              <div class="price-label">Per Person (3 rounds)</div>
-              <div class="price-amount">$349.08</div>
+              <div class="price-label">AM Rounds Only (3 rounds)</div>
+              <div class="price-amount">$349.08 <small>/pp</small></div>
               <div class="price-detail">Total: $2,792.64 for 8 players</div>
+            </div>
+            <div class="price-option replay-estimate">
+              <div class="price-label">Est. w/ PM Replays (6 rounds) <span class="estimate-badge">ESTIMATE</span></div>
+              <div class="price-amount">$593.44 <small>/pp</small></div>
+              <div class="price-detail">Total: ~$4,747.49 for 8 players</div>
             </div>
           </div>
 
           <div class="schedule-section">
             <button class="schedule-toggle" onclick="toggleSchedule(this)">
-              <span class="arrow">▶</span> View Schedule
+              <span class="arrow">▶</span> View Schedule & Replay Estimates
             </button>
             <table class="schedule-table">
-              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost</th></tr></thead>
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost (8 ppl)</th><th>Est. Replay</th></tr></thead>
               <tbody>
-                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Wizard</span></td><td>$656</td></tr>
-                <tr><td>Fri 9/11</td><td>9:06 AM</td><td><span class="course-name">MBN Kings North</span></td><td>$1,224</td></tr>
-                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td></tr>
+                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Wizard</span></td><td>$656</td><td class="estimate-text">~$459.20</td></tr>
+                <tr><td>Fri 9/11</td><td>9:06 AM</td><td><span class="course-name">MBN Kings North</span></td><td>$1,224</td><td class="estimate-text">~$856.80</td></tr>
+                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td><td class="estimate-text">~$443.80</td></tr>
               </tbody>
+              <tfoot>
+                <tr><td colspan="3" style="text-align:right;font-weight:600;color:var(--text-primary)">Totals:</td><td style="font-weight:600;color:var(--text-primary)">$2,514</td><td class="estimate-text" style="font-weight:600">~$1,759.80</td></tr>
+              </tfoot>
             </table>
+          </div>
+
+          <div class="replay-calc-note">
+            <strong>Replay estimate method:</strong> Each PM replay calculated at 70% of the AM round cost for that course. Wizard: $656 × 0.70 = $459.20 · Kings North: $1,224 × 0.70 = $856.80 · Arcadian Shores: $634 × 0.70 = $443.80. Estimated replay total: $1,759.80. Combined with taxes/fees proportionally: ~$4,747.49 total / $593.44 per person. Actual replay rates may vary — these are estimates only.
           </div>
 
           <div class="package-details">
             <div class="detail-group">
               <h4>Notes</h4>
               <ul>
-                <li>No replays — inquire about PM rates</li>
+                <li>No replays included — inquire about PM rates</li>
                 <li>Full amount due at booking</li>
               </ul>
             </div>
@@ -1029,31 +1135,43 @@ body::before {
 
           <div class="pricing-row">
             <div class="price-option selected">
-              <div class="price-label">Per Person (3 rounds)</div>
-              <div class="price-amount">$325.01</div>
+              <div class="price-label">AM Rounds Only (3 rounds)</div>
+              <div class="price-amount">$325.01 <small>/pp</small></div>
               <div class="price-detail">Total: $2,600.08 for 8 players</div>
+            </div>
+            <div class="price-option replay-estimate">
+              <div class="price-label">Est. w/ PM Replays (6 rounds) <span class="estimate-badge">ESTIMATE</span></div>
+              <div class="price-amount">$552.51 <small>/pp</small></div>
+              <div class="price-detail">Total: ~$4,420.10 for 8 players</div>
             </div>
           </div>
 
           <div class="schedule-section">
             <button class="schedule-toggle" onclick="toggleSchedule(this)">
-              <span class="arrow">▶</span> View Schedule
+              <span class="arrow">▶</span> View Schedule & Replay Estimates
             </button>
             <table class="schedule-table">
-              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost</th></tr></thead>
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost (8 ppl)</th><th>Est. Replay</th></tr></thead>
               <tbody>
-                <tr><td>Thu 9/10</td><td>9:04 AM</td><td><span class="course-name">Aberdeen Country Club</span></td><td>$456</td></tr>
-                <tr><td>Fri 9/11</td><td>9:00 AM</td><td><span class="course-name">Tidewater</span></td><td>$1,328</td></tr>
-                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td></tr>
+                <tr><td>Thu 9/10</td><td>9:04 AM</td><td><span class="course-name">Aberdeen Country Club</span></td><td>$456</td><td class="estimate-text">~$319.20</td></tr>
+                <tr><td>Fri 9/11</td><td>9:00 AM</td><td><span class="course-name">Tidewater</span></td><td>$1,328</td><td class="estimate-text">~$929.60</td></tr>
+                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td><td class="estimate-text">~$443.80</td></tr>
               </tbody>
+              <tfoot>
+                <tr><td colspan="3" style="text-align:right;font-weight:600;color:var(--text-primary)">Totals:</td><td style="font-weight:600;color:var(--text-primary)">$2,418</td><td class="estimate-text" style="font-weight:600">~$1,692.60</td></tr>
+              </tfoot>
             </table>
+          </div>
+
+          <div class="replay-calc-note">
+            <strong>Replay estimate method:</strong> Each PM replay calculated at 70% of the AM round cost for that course. Aberdeen: $456 × 0.70 = $319.20 · Tidewater: $1,328 × 0.70 = $929.60 · Arcadian Shores: $634 × 0.70 = $443.80. Estimated replay total: $1,692.60. Combined with taxes/fees proportionally: ~$4,420.10 total / $552.51 per person. Actual replay rates may vary — these are estimates only.
           </div>
 
           <div class="package-details">
             <div class="detail-group">
               <h4>Notes</h4>
               <ul>
-                <li>No replays — inquire about PM rates</li>
+                <li>No replays included — inquire about PM rates</li>
                 <li>Full amount due at booking</li>
               </ul>
             </div>
@@ -1069,92 +1187,412 @@ body::before {
 
     <!-- ===================== COMPARE ALL ===================== -->
     <div class="tab-content" id="tab-compare">
-      <div class="compare-wrap">
-        <table class="compare-table" id="compareTable">
-          <thead>
-            <tr>
-              <th class="sort-btn" onclick="sortTable(0)">Provider <span class="sort-arrow">↕</span></th>
-              <th class="sort-btn" onclick="sortTable(1)">Area <span class="sort-arrow">↕</span></th>
-              <th class="sort-btn" onclick="sortTable(2)">Rounds <span class="sort-arrow">↕</span></th>
-              <th class="sort-btn" onclick="sortTable(3)">Lodging <span class="sort-arrow">↕</span></th>
-              <th class="sort-btn" onclick="sortTable(4, true)">Play & Stay /pp <span class="sort-arrow">↕</span></th>
-              <th class="sort-btn" onclick="sortTable(5, true)">Golf Only /pp <span class="sort-arrow">↕</span></th>
-              <th>Courses</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="provider-cell">Caledonia Golf Vacations</td>
-              <td><span class="area-tag area-south">South / Pawleys</span></td>
-              <td>6</td>
-              <td>Need Airbnb</td>
-              <td>—</td>
-              <td class="price-cell">$683.87</td>
-              <td>True Blue, Caledonia, Tradition, Willbrook, Founders, Pawleys Plantation</td>
-            </tr>
-            <tr>
-              <td class="provider-cell">BYO — South/Pawleys</td>
-              <td><span class="area-tag area-south">South / Pawleys</span></td>
-              <td>3</td>
-              <td>Need Airbnb</td>
-              <td>—</td>
-              <td class="price-cell">$393.35</td>
-              <td>Caledonia, Tradition Club, Blackmoor</td>
-            </tr>
-            <tr>
-              <td class="provider-cell">MBGA (Elliott Realty)</td>
-              <td><span class="area-tag area-central">Myrtle Beach</span></td>
-              <td>5</td>
-              <td>Included</td>
-              <td class="price-cell">$613.79</td>
-              <td class="price-cell">$379.79</td>
-              <td>The Pearl, Blackmoor, Wachesaw East (w/ replays)</td>
-            </tr>
-            <tr>
-              <td class="provider-cell">Legends Golf Resort</td>
-              <td><span class="area-tag area-central">Myrtle Beach</span></td>
-              <td>4–6</td>
-              <td>Included</td>
-              <td class="price-cell">$667</td>
-              <td class="price-cell">$465</td>
-              <td>Legends courses (TBD)</td>
-            </tr>
-            <tr>
-              <td class="provider-cell">BYO — Myrtle Beach</td>
-              <td><span class="area-tag area-central">Myrtle Beach</span></td>
-              <td>3</td>
-              <td>Need Airbnb</td>
-              <td>—</td>
-              <td class="price-cell">$349.08</td>
-              <td>Wizard, MBN Kings North, Arcadian Shores</td>
-            </tr>
-            <tr>
-              <td class="provider-cell">Barefoot Golf Vacations</td>
-              <td><span class="area-tag area-north">North MB</span></td>
-              <td>5</td>
-              <td>Included</td>
-              <td class="price-cell">$1,135</td>
-              <td>TBD</td>
-              <td>Norman, Love, Fazio, or Dye</td>
-            </tr>
-            <tr>
-              <td class="provider-cell">BYO — North MB</td>
-              <td><span class="area-tag area-north">North MB</span></td>
-              <td>3</td>
-              <td>Need Airbnb</td>
-              <td>—</td>
-              <td class="price-cell">$325.01</td>
-              <td>Aberdeen, Tidewater, Arcadian Shores</td>
-            </tr>
-          </tbody>
-        </table>
+
+      <!-- Section: South / Pawleys -->
+      <div class="compare-area-header">
+        <span class="compare-area-dot" style="background:var(--south)"></span>
+        <h2 class="compare-area-title">South Myrtle / Surfside / Pawleys Island</h2>
       </div>
 
-      <!-- Notes -->
+      <div class="packages-grid" style="margin-bottom:40px;">
+        <!-- Caledonia -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Caledonia Golf Vacations</div>
+              <div class="package-provider">6 Distinct Courses · 6 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">6 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Per Person (6 rounds)</div>
+              <div class="price-amount">$683.87</div>
+              <div class="price-detail">Total: $5,470.96 · Deposit $50/pp by 3/19</div>
+            </div>
+          </div>
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule & Courses
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>7:48 AM</td><td><span class="course-name">True Blue Golf Club</span></td></tr>
+                <tr><td>Thu 9/10</td><td>2:00 PM</td><td><span class="course-name">Caledonia Golf & Fish Club</span></td></tr>
+                <tr><td>Fri 9/11</td><td>8:00 AM</td><td><span class="course-name">Tradition Club</span></td></tr>
+                <tr><td>Fri 9/11</td><td>2:14 PM</td><td><span class="course-name">Willbrook Plantation</span></td></tr>
+                <tr><td>Sat 9/12</td><td>8:01 AM</td><td><span class="course-name">Founders Club at Pawleys Island</span></td></tr>
+                <tr><td>Sat 9/12</td><td>2:20 PM</td><td><span class="course-name">Pawleys Plantation</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Includes</h4>
+              <ul>
+                <li>Carts, taxes, resort fees all included</li>
+                <li>6 distinct courses — no same-course replays</li>
+                <li>Custom-built itinerary, fully swappable</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Key Info</h4>
+              <ul>
+                <li>Replays cannot be pre-booked (day-of availability only)</li>
+                <li>Cancel 14 days prior for full refund</li>
+                <li>Balance due 8/27/2026</li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Tracy Seganti · <a href="mailto:tracyseganti@caledoniagolfvacations.com">tracyseganti@caledoniagolfvacations.com</a> · (866) 954-8311</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- BYO South -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Player's Choice — Build Your Own</div>
+              <div class="package-provider">3 Courses · 3 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">3 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">AM Rounds Only (3 rounds)</div>
+              <div class="price-amount">$393.35 <small>/pp</small></div>
+              <div class="price-detail">Total: $3,146.80 for 8 players</div>
+            </div>
+            <div class="price-option replay-estimate">
+              <div class="price-label">Est. w/ PM Replays (6 rounds) <span class="estimate-badge">ESTIMATE</span></div>
+              <div class="price-amount">$668.70 <small>/pp</small></div>
+              <div class="price-detail">Total: ~$5,349.56 for 8 players</div>
+            </div>
+          </div>
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule & Replay Estimates
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost (8 ppl)</th><th>Est. Replay</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Caledonia</span></td><td>$1,504</td><td class="estimate-text">~$1,052.80</td></tr>
+                <tr><td>Fri 9/11</td><td>9:04 AM</td><td><span class="course-name">Tradition Club</span></td><td>$736</td><td class="estimate-text">~$515.20</td></tr>
+                <tr><td>Sat 9/12</td><td>9:05 AM</td><td><span class="course-name">Blackmoor</span></td><td>$712</td><td class="estimate-text">~$498.40</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td colspan="3" style="text-align:right;font-weight:600;color:var(--text-primary)">Totals:</td><td style="font-weight:600;color:var(--text-primary)">$2,952</td><td class="estimate-text" style="font-weight:600">~$2,066.40</td></tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="replay-calc-note">
+            <strong>Replay estimate method:</strong> Each PM replay calculated at 70% of the AM round cost for that course. Caledonia: $1,504 × 0.70 = $1,052.80 · Tradition: $736 × 0.70 = $515.20 · Blackmoor: $712 × 0.70 = $498.40. Estimated replay total: $2,066.40. Combined with taxes/fees proportionally: ~$5,349.56 total / $668.70 per person. Actual replay rates may vary — these are estimates only.
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Via Player's Choice online booking</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Myrtle Beach Central -->
+      <div class="compare-area-header">
+        <span class="compare-area-dot" style="background:var(--central)"></span>
+        <h2 class="compare-area-title">Myrtle Beach (Central)</h2>
+      </div>
+
+      <div class="packages-grid" style="margin-bottom:40px;">
+        <!-- MBGA -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Myrtle Beach Golf Authority</div>
+              <div class="package-provider">MB Golf Trail w/ Replays · 3 Courses / 5 Rounds</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-stay">Play & Stay</span>
+              <span class="badge badge-golf">5 Rounds</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Pelicans Landing (Play & Stay)</div>
+              <div class="price-amount">$613.79 <small>/pp</small></div>
+              <div class="price-detail">2× 3BR/2.5BA 2nd-row condos · $600 deposit</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Forest Dunes (Play & Stay)</div>
+              <div class="price-amount">$646.73 <small>/pp</small></div>
+              <div class="price-detail">2× 3BR/2.5BA oceanfront condos · $693.90 dep.</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only</div>
+              <div class="price-amount">$379.79 <small>/pp</small></div>
+              <div class="price-detail">$200 deposit · Need Airbnb</div>
+            </div>
+          </div>
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule & Courses
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>1:00 PM</td><td><span class="course-name">The Pearl – East to North</span></td></tr>
+                <tr><td>Fri 9/11</td><td>9:05 AM</td><td><span class="course-name">Blackmoor</span></td></tr>
+                <tr><td>Fri 9/11</td><td>2:07 PM</td><td><span class="course-name">Blackmoor</span> <span class="replay-tag">PM REPLAY</span></td></tr>
+                <tr><td>Sat 9/12</td><td>8:50 AM</td><td><span class="course-name">Wachesaw East</span></td></tr>
+                <tr><td>Sat 9/12</td><td>2:10 PM</td><td><span class="course-name">Wachesaw East</span> <span class="replay-tag">PM REPLAY</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Includes</h4>
+              <ul>
+                <li>Green fees, carts, towels/linens, cleaning, all tax</li>
+                <li>Replays pre-booked and guaranteed</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Payment</h4>
+              <ul>
+                <li>50% deposit within 10 days · Balance 30 days prior</li>
+                <li>Quote valid 4 days from issue</li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Kevin Van Heirseele · <a href="mailto:golfdept@elliottrealty.com">golfdept@elliottrealty.com</a> · 843-249-1406 x347</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- Legends -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Legends Golf Resort</div>
+              <div class="package-provider">Multiple Options · 4 or 6 Rounds · Meals Included</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-stay">Play & Stay</span>
+              <span class="badge badge-golf">4–6 Rounds</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option">
+              <div class="price-label">Play & Stay · 3N / 4 Rounds</div>
+              <div class="price-amount">$667 <small>/pp</small></div>
+              <div class="price-detail">Villa + meals + drinks + range</div>
+            </div>
+            <div class="price-option selected">
+              <div class="price-label">Play & Stay · 4N / 6 Rounds</div>
+              <div class="price-amount">$1,035 <small>/pp</small></div>
+              <div class="price-detail">Thu–Sun, 2 rounds/day</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only · 4 Rounds</div>
+              <div class="price-amount">$465 <small>/pp</small></div>
+              <div class="price-detail">Meals & drinks incl., no range</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only · 6 Rounds</div>
+              <div class="price-amount">$775 <small>/pp</small></div>
+              <div class="price-detail">Need Airbnb</div>
+            </div>
+          </div>
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Play & Stay Includes</h4>
+              <ul>
+                <li>2BR villa (4/villa, 2 double beds, full kitchen, 2 bath)</li>
+                <li>Daily breakfast & lunch · 2 drink tickets/day</li>
+                <li>Unlimited range balls · 4th round free after 1 PM</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Unique Advantage</h4>
+              <p style="color:var(--gold);font-weight:500;">Only provider including daily meals and drinks in pricing</p>
+            </div>
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Joe Rampone · <a href="mailto:jrampone@legendsgolf.com">jrampone@legendsgolf.com</a> · 843-236-9318 x2245</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- BYO Central -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Player's Choice — Build Your Own</div>
+              <div class="package-provider">3 Courses · 3 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">3 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">AM Rounds Only (3 rounds)</div>
+              <div class="price-amount">$349.08 <small>/pp</small></div>
+              <div class="price-detail">Total: $2,792.64 for 8 players</div>
+            </div>
+            <div class="price-option replay-estimate">
+              <div class="price-label">Est. w/ PM Replays (6 rounds) <span class="estimate-badge">ESTIMATE</span></div>
+              <div class="price-amount">$593.44 <small>/pp</small></div>
+              <div class="price-detail">Total: ~$4,747.49 for 8 players</div>
+            </div>
+          </div>
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule & Replay Estimates
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost (8 ppl)</th><th>Est. Replay</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Wizard</span></td><td>$656</td><td class="estimate-text">~$459.20</td></tr>
+                <tr><td>Fri 9/11</td><td>9:06 AM</td><td><span class="course-name">MBN Kings North</span></td><td>$1,224</td><td class="estimate-text">~$856.80</td></tr>
+                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td><td class="estimate-text">~$443.80</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td colspan="3" style="text-align:right;font-weight:600;color:var(--text-primary)">Totals:</td><td style="font-weight:600;color:var(--text-primary)">$2,514</td><td class="estimate-text" style="font-weight:600">~$1,759.80</td></tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="replay-calc-note">
+            <strong>Replay estimate method:</strong> Each PM replay calculated at 70% of the AM round cost for that course. Wizard: $656 × 0.70 = $459.20 · Kings North: $1,224 × 0.70 = $856.80 · Arcadian Shores: $634 × 0.70 = $443.80. Estimated replay total: $1,759.80. Combined with taxes/fees proportionally: ~$4,747.49 total / $593.44 per person. Actual replay rates may vary — these are estimates only.
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Via Player's Choice online booking</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: North Myrtle Beach -->
+      <div class="compare-area-header">
+        <span class="compare-area-dot" style="background:var(--north)"></span>
+        <h2 class="compare-area-title">North Myrtle Beach</h2>
+      </div>
+
+      <div class="packages-grid" style="margin-bottom:40px;">
+        <!-- Barefoot -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Barefoot Golf Vacations</div>
+              <div class="package-provider">Barefoot Resort · 5 Rounds</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-stay">Play & Stay</span>
+              <span class="badge badge-golf">5 Rounds</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Play & Stay · 3N / 5 Rounds</div>
+              <div class="price-amount">$1,135 <small>/pp</small></div>
+              <div class="price-detail">All tax included · $100/pp deposit</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only</div>
+              <div class="price-amount">TBD</div>
+              <div class="price-detail">Book via pro shop · 843-390-3200</div>
+            </div>
+          </div>
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Includes</h4>
+              <ul>
+                <li>2BR/2BA golf villas (4/villa, full kitchen, washer/dryer)</li>
+                <li>5 rounds: Norman, Love, Fazio, or Dye (cart incl.)</li>
+                <li>4th round free (PM after 12:00)</li>
+                <li>Breakfast buffet · Range balls · $20 Barefoot Bucks</li>
+                <li>15% off at Putter's Pub</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Notes</h4>
+              <ul>
+                <li>Villas ~1 mi from clubhouse, no shuttle, need own transport</li>
+                <li>$15/pp cancellation fee (before 30 days)</li>
+                <li>4-night/6-round quote still pending</li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Alec Truett · <a href="mailto:atruett@barefootgolf.com">atruett@barefootgolf.com</a> · 1-888-581-1927</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- BYO North -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Player's Choice — Build Your Own</div>
+              <div class="package-provider">3 Courses · 3 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">3 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">AM Rounds Only (3 rounds)</div>
+              <div class="price-amount">$325.01 <small>/pp</small></div>
+              <div class="price-detail">Total: $2,600.08 for 8 players</div>
+            </div>
+            <div class="price-option replay-estimate">
+              <div class="price-label">Est. w/ PM Replays (6 rounds) <span class="estimate-badge">ESTIMATE</span></div>
+              <div class="price-amount">$552.51 <small>/pp</small></div>
+              <div class="price-detail">Total: ~$4,420.10 for 8 players</div>
+            </div>
+          </div>
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule & Replay Estimates
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost (8 ppl)</th><th>Est. Replay</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>9:04 AM</td><td><span class="course-name">Aberdeen Country Club</span></td><td>$456</td><td class="estimate-text">~$319.20</td></tr>
+                <tr><td>Fri 9/11</td><td>9:00 AM</td><td><span class="course-name">Tidewater</span></td><td>$1,328</td><td class="estimate-text">~$929.60</td></tr>
+                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td><td class="estimate-text">~$443.80</td></tr>
+              </tbody>
+              <tfoot>
+                <tr><td colspan="3" style="text-align:right;font-weight:600;color:var(--text-primary)">Totals:</td><td style="font-weight:600;color:var(--text-primary)">$2,418</td><td class="estimate-text" style="font-weight:600">~$1,692.60</td></tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="replay-calc-note">
+            <strong>Replay estimate method:</strong> Each PM replay calculated at 70% of the AM round cost for that course. Aberdeen: $456 × 0.70 = $319.20 · Tidewater: $1,328 × 0.70 = $929.60 · Arcadian Shores: $634 × 0.70 = $443.80. Estimated replay total: $1,692.60. Combined with taxes/fees proportionally: ~$4,420.10 total / $552.51 per person. Actual replay rates may vary — these are estimates only.
+          </div>
+          <div class="contact-bar">
+            <div class="contact-info">Via Player's Choice online booking</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Planning Notes -->
       <div class="global-notes">
         <h3>Planning Notes</h3>
         <p>
-          All quotes are for <strong>8 players</strong> arriving <strong>Thursday, September 10</strong> and departing <strong>Sunday, September 13, 2026</strong> (3 nights). 
+          All quotes are for <strong>8 players</strong> arriving <strong>Wednesday, September 9</strong> and departing <strong>Sunday, September 13, 2026</strong> (4 nights). 
           Play & Stay prices include lodging and golf. Golf Only prices require separate Airbnb arrangements. 
           The BYO options show 3 AM rounds only — PM replays would need to be added separately. 
           The Caledonia Golf Vacations package is the only option with 6 distinct courses (no replays of the same course). 
@@ -1162,6 +1600,9 @@ body::before {
           Legends is the only provider including daily meals and drinks in their pricing. 
           Barefoot's 4-night/6-round quote is still pending.
         </p>
+        <div class="estimate-disclaimer">
+          <strong>About Replay Estimates:</strong> BYO replay costs are estimated at 70% of the AM round price for each course. This is an approximation — actual replay rates vary by course and should be confirmed before booking. Taxes and fees on replays are estimated proportionally to the original quote's tax rate.
+        </div>
       </div>
     </div>
 
