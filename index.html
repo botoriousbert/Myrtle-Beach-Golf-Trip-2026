@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myrtle Beach Golf Trip Planner — Sept 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0a1a0f;
+  --bg-card: #0f2517;
+  --bg-card-hover: #132e1c;
+  --bg-surface: #1a3d24;
+  --green-primary: #4ade80;
+  --green-muted: #22c55e;
+  --green-dark: #166534;
+  --green-glow: rgba(74, 222, 128, 0.15);
+  --gold: #fbbf24;
+  --gold-dim: #d4a017;
+  --text-primary: #f0fdf4;
+  --text-secondary: #a7c4b0;
+  --text-muted: #5a7d65;
+  --border: rgba(74, 222, 128, 0.12);
+  --border-bright: rgba(74, 222, 128, 0.3);
+  --south: #f472b6;
+  --south-bg: rgba(244, 114, 182, 0.1);
+  --central: #60a5fa;
+  --central-bg: rgba(96, 165, 250, 0.1);
+  --north: #fbbf24;
+  --north-bg: rgba(251, 191, 36, 0.1);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 40px rgba(74, 222, 128, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* HERO */
+.hero {
+  padding: 60px 0 40px;
+  text-align: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green-primary), transparent);
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--green-primary);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--green-primary) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero-meta span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-meta .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green-primary);
+  display: inline-block;
+}
+
+/* TABS */
+.tab-section {
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+.tab-btn:hover {
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+}
+
+.tab-btn.active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.tab-btn .tab-area-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.tab-btn[data-area="south"] .tab-area-dot { background: var(--south); }
+.tab-btn[data-area="central"] .tab-area-dot { background: var(--central); }
+.tab-btn[data-area="north"] .tab-area-dot { background: var(--north); }
+.tab-btn[data-area="compare"] .tab-area-dot { background: var(--green-primary); }
+
+/* TAB CONTENT */
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+
+/* PACKAGE CARDS */
+.packages-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.package-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.package-card:hover {
+  border-color: var(--border-bright);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.package-header {
+  padding: 28px 28px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.package-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.package-provider {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.package-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.badge-stay {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--green-primary);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.badge-golf {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.badge-airbnb {
+  background: rgba(244, 114, 182, 0.1);
+  color: var(--south);
+  border: 1px solid rgba(244, 114, 182, 0.2);
+}
+
+/* PRICING TOGGLE */
+.pricing-row {
+  display: flex;
+  gap: 12px;
+  padding: 0 28px 20px;
+  flex-wrap: wrap;
+}
+
+.price-option {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  flex: 1;
+  min-width: 180px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.price-option:hover, .price-option.selected {
+  border-color: var(--green-primary);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.price-option.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  color: var(--green-primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.price-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.price-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--green-primary);
+}
+
+.price-amount small {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.price-detail {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* SCHEDULE TABLE */
+.schedule-section {
+  padding: 0 28px 24px;
+}
+
+.schedule-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  transition: color 0.3s;
+  user-select: none;
+  background: none;
+  border: none;
+  font-family: inherit;
+}
+
+.schedule-toggle:hover { color: var(--green-primary); }
+
+.schedule-toggle .arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+  font-size: 10px;
+}
+
+.schedule-toggle.open .arrow { transform: rotate(90deg); }
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  display: none;
+}
+
+.schedule-table.visible { display: table; animation: fadeIn 0.3s ease; }
+
+.schedule-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.schedule-table td {
+  font-size: 13px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: var(--text-secondary);
+}
+
+.schedule-table td:first-child { color: var(--text-primary); font-weight: 500; }
+
+.course-name {
+  color: var(--green-primary);
+  font-weight: 500;
+}
+
+.replay-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--gold);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* DETAILS/NOTES */
+.package-details {
+  padding: 0 28px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.detail-group h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.detail-group p, .detail-group li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.detail-group ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detail-group ul li::before {
+  content: '›';
+  color: var(--green-primary);
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+/* CONTACT BAR */
+.contact-bar {
+  padding: 16px 28px;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.contact-info {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.contact-info a {
+  color: var(--green-primary);
+  text-decoration: none;
+}
+
+.status-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.status-quoted {
+  background: rgba(96, 165, 250, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+.status-pending {
+  background: rgba(251, 191, 36, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+/* COMPARISON TABLE */
+.compare-wrap {
+  overflow-x: auto;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.compare-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+}
+
+.compare-table td {
+  padding: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  vertical-align: top;
+}
+
+.compare-table tr:hover td {
+  background: rgba(255,255,255,0.02);
+}
+
+.compare-table .provider-cell {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.compare-table .price-cell {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--green-primary);
+  font-weight: 600;
+}
+
+.area-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.area-south { background: var(--south-bg); color: var(--south); }
+.area-central { background: var(--central-bg); color: var(--central); }
+.area-north { background: var(--north-bg); color: var(--north); }
+
+/* NOTES SECTION */
+.global-notes {
+  margin-top: 48px;
+  padding: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  margin-bottom: 60px;
+}
+
+.global-notes h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.global-notes p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .package-header { flex-direction: column; }
+  .pricing-row { flex-direction: column; }
+  .price-option { min-width: auto; }
+  .hero-meta { gap: 16px; }
+  .tab-bar { flex-direction: column; }
+  .tab-btn { min-width: auto; text-align: left; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--green-dark); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green-muted); }
+
+/* Sort buttons */
+.sort-btn {
+  cursor: pointer;
+  user-select: none;
+}
+.sort-btn:hover {
+  color: var(--green-primary);
+}
+.sort-btn .sort-arrow {
+  font-size: 10px;
+  margin-left: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">Bradford W. Yeakle & Co.</div>
+    <h1>Myrtle Beach<br>Golf Trip 2026</h1>
+    <div class="hero-meta">
+      <span><span class="dot"></span> 8 Players</span>
+      <span><span class="dot"></span> Sept 10–13, 2026</span>
+      <span><span class="dot"></span> 7 Packages Compared</span>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <section class="tab-section">
+    <div class="tab-bar">
+      <button class="tab-btn active" data-area="south" onclick="switchTab('south')">
+        <span class="tab-area-dot"></span>South / Pawleys
+      </button>
+      <button class="tab-btn" data-area="central" onclick="switchTab('central')">
+        <span class="tab-area-dot"></span>Myrtle Beach
+      </button>
+      <button class="tab-btn" data-area="north" onclick="switchTab('north')">
+        <span class="tab-area-dot"></span>North Myrtle Beach
+      </button>
+      <button class="tab-btn" data-area="compare" onclick="switchTab('compare')">
+        <span class="tab-area-dot"></span>Compare All
+      </button>
+    </div>
+
+    <!-- ===================== SOUTH ===================== -->
+    <div class="tab-content active" id="tab-south">
+
+      <!-- Caledonia Golf Vacations -->
+      <div class="packages-grid">
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Caledonia Golf Vacations</div>
+              <div class="package-provider">6 Courses · 6 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">6 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Per Person (6 rounds)</div>
+              <div class="price-amount">$683.87</div>
+              <div class="price-detail">Total: $5,470.96 for 8 players</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Deposit Due 3/19</div>
+              <div class="price-amount">$50 <small>/pp</small></div>
+              <div class="price-detail">$400 total · Balance due 8/27</div>
+            </div>
+          </div>
+
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>7:48 AM</td><td><span class="course-name">True Blue Golf Club</span></td></tr>
+                <tr><td>Thu 9/10</td><td>2:00 PM</td><td><span class="course-name">Caledonia Golf & Fish Club</span></td></tr>
+                <tr><td>Fri 9/11</td><td>8:00 AM</td><td><span class="course-name">Tradition Club</span></td></tr>
+                <tr><td>Fri 9/11</td><td>2:14 PM</td><td><span class="course-name">Willbrook Plantation</span></td></tr>
+                <tr><td>Sat 9/12</td><td>8:01 AM</td><td><span class="course-name">Founders Club at Pawleys Island</span></td></tr>
+                <tr><td>Sat 9/12</td><td>2:20 PM</td><td><span class="course-name">Pawleys Plantation</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Includes</h4>
+              <ul>
+                <li>Carts, taxes, and resort fees included</li>
+                <li>6 distinct courses — no replays</li>
+                <li>Custom-built itinerary</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Cancellation</h4>
+              <p>Full refund if cancelled 14 days prior to arrival</p>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Tracy Seganti · <a href="mailto:tracyseganti@caledoniagolfvacations.com">tracyseganti@caledoniagolfvacations.com</a> · (866) 954-8311</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- BYO South (3 rounds) -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Player's Choice — Build Your Own</div>
+              <div class="package-provider">3 Courses · 3 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">3 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Per Person (3 rounds)</div>
+              <div class="price-amount">$393.35</div>
+              <div class="price-detail">Total: $3,146.80 for 8 players</div>
+            </div>
+          </div>
+
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Caledonia</span></td><td>$1,504</td></tr>
+                <tr><td>Fri 9/11</td><td>9:04 AM</td><td><span class="course-name">Tradition Club</span></td><td>$736</td></tr>
+                <tr><td>Sat 9/12</td><td>9:05 AM</td><td><span class="course-name">Blackmoor</span></td><td>$712</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Notes</h4>
+              <ul>
+                <li>No replays included — need to inquire about PM rates</li>
+                <li>Replays cannot be pre-booked (availability day-of only)</li>
+                <li>Full amount due at booking</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Via Player's Choice online booking</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== CENTRAL / MYRTLE BEACH ===================== -->
+    <div class="tab-content" id="tab-central">
+      <div class="packages-grid">
+
+        <!-- MBGA -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Myrtle Beach Golf Authority</div>
+              <div class="package-provider">MB Golf Trail with Replays · 3 Courses / 5 Rounds</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-stay">Play & Stay</span>
+              <span class="badge badge-golf">5 Rounds</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Pelicans Landing (Play & Stay)</div>
+              <div class="price-amount">$613.79 <small>/pp</small></div>
+              <div class="price-detail">3BR condos · 2nd row · $600 deposit</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Forest Dunes (Play & Stay)</div>
+              <div class="price-amount">$646.73 <small>/pp</small></div>
+              <div class="price-detail">3BR oceanfront condos · $693.90 deposit</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only</div>
+              <div class="price-amount">$379.79 <small>/pp</small></div>
+              <div class="price-detail">$200 deposit · Need Airbnb</div>
+            </div>
+          </div>
+
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>1:00 PM</td><td><span class="course-name">The Pearl – East to North</span></td></tr>
+                <tr><td>Fri 9/11</td><td>9:05 AM</td><td><span class="course-name">Blackmoor</span></td></tr>
+                <tr><td>Fri 9/11</td><td>2:07 PM</td><td><span class="course-name">Blackmoor</span> <span class="replay-tag">PM REPLAY</span></td></tr>
+                <tr><td>Sat 9/12</td><td>8:50 AM</td><td><span class="course-name">Wachesaw East</span></td></tr>
+                <tr><td>Sat 9/12</td><td>2:10 PM</td><td><span class="course-name">Wachesaw East</span> <span class="replay-tag">PM REPLAY</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Includes</h4>
+              <ul>
+                <li>Green fees, cart fees, towels/linens, cleaning, all tax</li>
+                <li>Replays pre-booked and guaranteed</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Payment</h4>
+              <ul>
+                <li>50% deposit due within 10 days</li>
+                <li>Balance due 30 days before arrival</li>
+                <li>Quote valid 4 days</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Kevin Van Heirseele · <a href="mailto:golfdept@elliottrealty.com">golfdept@elliottrealty.com</a> · 843-249-1406 x347</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- Legends -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Legends Golf Resort</div>
+              <div class="package-provider">Multiple Options · 4 or 6 Rounds</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-stay">Play & Stay</span>
+              <span class="badge badge-golf">4–6 Rounds</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Play & Stay · 3N / 4 Rounds</div>
+              <div class="price-amount">$667 <small>/pp</small></div>
+              <div class="price-detail">Villa + breakfast, lunch, drinks, range</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Play & Stay · 4N / 6 Rounds</div>
+              <div class="price-amount">$1,035 <small>/pp</small></div>
+              <div class="price-detail">Thu–Sun, 2 rounds/day</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only · 4 Rounds</div>
+              <div class="price-amount">$465 <small>/pp</small></div>
+              <div class="price-detail">Meals & drinks included, no range</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only · 6 Rounds</div>
+              <div class="price-amount">$775 <small>/pp</small></div>
+              <div class="price-detail">Need Airbnb</div>
+            </div>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Play & Stay Includes</h4>
+              <ul>
+                <li>2BR villa (4/villa, 2 double beds, full kitchen, 2 bath)</li>
+                <li>Daily breakfast & lunch</li>
+                <li>2 drink tickets per day</li>
+                <li>Unlimited range balls</li>
+                <li>4th round free after 1:00 PM</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Lodging</h4>
+              <p>Two-bedroom villas at Legends Resort</p>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Joe Rampone · <a href="mailto:jrampone@legendsgolf.com">jrampone@legendsgolf.com</a> · 843-236-9318 x2245</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- BYO Central -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Player's Choice — Build Your Own</div>
+              <div class="package-provider">3 Courses · 3 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">3 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Per Person (3 rounds)</div>
+              <div class="price-amount">$349.08</div>
+              <div class="price-detail">Total: $2,792.64 for 8 players</div>
+            </div>
+          </div>
+
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>9:00 AM</td><td><span class="course-name">Wizard</span></td><td>$656</td></tr>
+                <tr><td>Fri 9/11</td><td>9:06 AM</td><td><span class="course-name">MBN Kings North</span></td><td>$1,224</td></tr>
+                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Notes</h4>
+              <ul>
+                <li>No replays — inquire about PM rates</li>
+                <li>Full amount due at booking</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Via Player's Choice online booking</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== NORTH MYRTLE BEACH ===================== -->
+    <div class="tab-content" id="tab-north">
+      <div class="packages-grid">
+
+        <!-- Barefoot -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Barefoot Golf Vacations</div>
+              <div class="package-provider">Barefoot Resort · 5 Rounds</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-stay">Play & Stay</span>
+              <span class="badge badge-golf">5 Rounds</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Play & Stay · 3N / 5 Rounds</div>
+              <div class="price-amount">$1,135 <small>/pp</small></div>
+              <div class="price-detail">All tax included</div>
+            </div>
+            <div class="price-option">
+              <div class="price-label">Golf Only</div>
+              <div class="price-amount">TBD</div>
+              <div class="price-detail">Book via pro shop · 843-390-3200</div>
+            </div>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Play & Stay Includes</h4>
+              <ul>
+                <li>2BR/2BA golf villas (4/villa, washer/dryer, full kitchen)</li>
+                <li>5 rounds on Norman, Love, Fazio, or Dye courses</li>
+                <li>4th round free (PM after 12:00)</li>
+                <li>Breakfast buffet at Resort Clubhouse</li>
+                <li>Complimentary range balls</li>
+                <li>$20 Barefoot Bucks for pro shop</li>
+                <li>15% off at Putter's Pub</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Payment</h4>
+              <ul>
+                <li>$100/person deposit to hold</li>
+                <li>Final payment 30 days before arrival</li>
+                <li>$15/pp cancellation fee (before 30 days)</li>
+              </ul>
+            </div>
+            <div class="detail-group">
+              <h4>Note</h4>
+              <p>Villas ~1 mile from clubhouse, no shuttle. Need own transportation. Pending quote for 4N/6 rounds.</p>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Alec Truett · <a href="mailto:atruett@barefootgolf.com">atruett@barefootgolf.com</a> · 1-888-581-1927</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+
+        <!-- BYO North -->
+        <div class="package-card">
+          <div class="package-header">
+            <div>
+              <div class="package-name">Player's Choice — Build Your Own</div>
+              <div class="package-provider">3 Courses · 3 Rounds · Golf Only</div>
+            </div>
+            <div class="package-badges">
+              <span class="badge badge-golf">3 Rounds</span>
+              <span class="badge badge-airbnb">Need Airbnb</span>
+            </div>
+          </div>
+
+          <div class="pricing-row">
+            <div class="price-option selected">
+              <div class="price-label">Per Person (3 rounds)</div>
+              <div class="price-amount">$325.01</div>
+              <div class="price-detail">Total: $2,600.08 for 8 players</div>
+            </div>
+          </div>
+
+          <div class="schedule-section">
+            <button class="schedule-toggle" onclick="toggleSchedule(this)">
+              <span class="arrow">▶</span> View Schedule
+            </button>
+            <table class="schedule-table">
+              <thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Cost</th></tr></thead>
+              <tbody>
+                <tr><td>Thu 9/10</td><td>9:04 AM</td><td><span class="course-name">Aberdeen Country Club</span></td><td>$456</td></tr>
+                <tr><td>Fri 9/11</td><td>9:00 AM</td><td><span class="course-name">Tidewater</span></td><td>$1,328</td></tr>
+                <tr><td>Sat 9/12</td><td>9:00 AM</td><td><span class="course-name">Arcadian Shores</span></td><td>$634</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="package-details">
+            <div class="detail-group">
+              <h4>Notes</h4>
+              <ul>
+                <li>No replays — inquire about PM rates</li>
+                <li>Full amount due at booking</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="contact-bar">
+            <div class="contact-info">Via Player's Choice online booking</div>
+            <span class="status-tag status-quoted">Quoted</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== COMPARE ALL ===================== -->
+    <div class="tab-content" id="tab-compare">
+      <div class="compare-wrap">
+        <table class="compare-table" id="compareTable">
+          <thead>
+            <tr>
+              <th class="sort-btn" onclick="sortTable(0)">Provider <span class="sort-arrow">↕</span></th>
+              <th class="sort-btn" onclick="sortTable(1)">Area <span class="sort-arrow">↕</span></th>
+              <th class="sort-btn" onclick="sortTable(2)">Rounds <span class="sort-arrow">↕</span></th>
+              <th class="sort-btn" onclick="sortTable(3)">Lodging <span class="sort-arrow">↕</span></th>
+              <th class="sort-btn" onclick="sortTable(4, true)">Play & Stay /pp <span class="sort-arrow">↕</span></th>
+              <th class="sort-btn" onclick="sortTable(5, true)">Golf Only /pp <span class="sort-arrow">↕</span></th>
+              <th>Courses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="provider-cell">Caledonia Golf Vacations</td>
+              <td><span class="area-tag area-south">South / Pawleys</span></td>
+              <td>6</td>
+              <td>Need Airbnb</td>
+              <td>—</td>
+              <td class="price-cell">$683.87</td>
+              <td>True Blue, Caledonia, Tradition, Willbrook, Founders, Pawleys Plantation</td>
+            </tr>
+            <tr>
+              <td class="provider-cell">BYO — South/Pawleys</td>
+              <td><span class="area-tag area-south">South / Pawleys</span></td>
+              <td>3</td>
+              <td>Need Airbnb</td>
+              <td>—</td>
+              <td class="price-cell">$393.35</td>
+              <td>Caledonia, Tradition Club, Blackmoor</td>
+            </tr>
+            <tr>
+              <td class="provider-cell">MBGA (Elliott Realty)</td>
+              <td><span class="area-tag area-central">Myrtle Beach</span></td>
+              <td>5</td>
+              <td>Included</td>
+              <td class="price-cell">$613.79</td>
+              <td class="price-cell">$379.79</td>
+              <td>The Pearl, Blackmoor, Wachesaw East (w/ replays)</td>
+            </tr>
+            <tr>
+              <td class="provider-cell">Legends Golf Resort</td>
+              <td><span class="area-tag area-central">Myrtle Beach</span></td>
+              <td>4–6</td>
+              <td>Included</td>
+              <td class="price-cell">$667</td>
+              <td class="price-cell">$465</td>
+              <td>Legends courses (TBD)</td>
+            </tr>
+            <tr>
+              <td class="provider-cell">BYO — Myrtle Beach</td>
+              <td><span class="area-tag area-central">Myrtle Beach</span></td>
+              <td>3</td>
+              <td>Need Airbnb</td>
+              <td>—</td>
+              <td class="price-cell">$349.08</td>
+              <td>Wizard, MBN Kings North, Arcadian Shores</td>
+            </tr>
+            <tr>
+              <td class="provider-cell">Barefoot Golf Vacations</td>
+              <td><span class="area-tag area-north">North MB</span></td>
+              <td>5</td>
+              <td>Included</td>
+              <td class="price-cell">$1,135</td>
+              <td>TBD</td>
+              <td>Norman, Love, Fazio, or Dye</td>
+            </tr>
+            <tr>
+              <td class="provider-cell">BYO — North MB</td>
+              <td><span class="area-tag area-north">North MB</span></td>
+              <td>3</td>
+              <td>Need Airbnb</td>
+              <td>—</td>
+              <td class="price-cell">$325.01</td>
+              <td>Aberdeen, Tidewater, Arcadian Shores</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Notes -->
+      <div class="global-notes">
+        <h3>Planning Notes</h3>
+        <p>
+          All quotes are for <strong>8 players</strong> arriving <strong>Thursday, September 10</strong> and departing <strong>Sunday, September 13, 2026</strong> (3 nights). 
+          Play & Stay prices include lodging and golf. Golf Only prices require separate Airbnb arrangements. 
+          The BYO options show 3 AM rounds only — PM replays would need to be added separately. 
+          The Caledonia Golf Vacations package is the only option with 6 distinct courses (no replays of the same course). 
+          MBGA's package includes pre-booked guaranteed replays, while Caledonia noted replays cannot be pre-booked and are day-of availability only. 
+          Legends is the only provider including daily meals and drinks in their pricing. 
+          Barefoot's 4-night/6-round quote is still pending.
+        </p>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<script>
+function switchTab(area) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  
+  document.querySelector(`.tab-btn[data-area="${area}"]`).classList.add('active');
+  document.getElementById(`tab-${area}`).classList.add('active');
+}
+
+function toggleSchedule(btn) {
+  btn.classList.toggle('open');
+  const table = btn.nextElementSibling;
+  table.classList.toggle('visible');
+  btn.innerHTML = btn.classList.contains('open') 
+    ? '<span class="arrow">▶</span> Hide Schedule' 
+    : '<span class="arrow">▶</span> View Schedule';
+}
+
+function sortTable(colIndex, isPrice = false) {
+  const table = document.getElementById('compareTable');
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  
+  const currentDir = table.getAttribute('data-sort-dir') === 'asc' ? 'desc' : 'asc';
+  table.setAttribute('data-sort-dir', currentDir);
+  
+  rows.sort((a, b) => {
+    let aVal = a.cells[colIndex].textContent.trim();
+    let bVal = b.cells[colIndex].textContent.trim();
+    
+    if (isPrice) {
+      aVal = aVal === '—' || aVal === 'TBD' ? 99999 : parseFloat(aVal.replace(/[$,]/g, ''));
+      bVal = bVal === '—' || bVal === 'TBD' ? 99999 : parseFloat(bVal.replace(/[$,]/g, ''));
+      return currentDir === 'asc' ? aVal - bVal : bVal - aVal;
+    }
+    
+    return currentDir === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+  });
+  
+  rows.forEach(row => tbody.appendChild(row));
+}
+</script>
+
+</body>
+</html>
