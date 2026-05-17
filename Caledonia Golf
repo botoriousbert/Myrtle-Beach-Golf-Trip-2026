@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myrtle Beach Golf Trip — Sept 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a1a0f;
+  --card: #0f2517;
+  --surface: #1a3d24;
+  --green: #4ade80;
+  --green-glow: rgba(74, 222, 128, 0.1);
+  --gold: #fbbf24;
+  --text: #f0fdf4;
+  --text2: #a7c4b0;
+  --text3: #5a7d65;
+  --border: rgba(74, 222, 128, 0.12);
+  --border-b: rgba(74, 222, 128, 0.25);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse at 30% 0%, rgba(74,222,128,0.04) 0%, transparent 60%), radial-gradient(ellipse at 80% 100%, rgba(251,191,36,0.03) 0%, transparent 50%); pointer-events: none; z-index: 0; }
+.page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+/* HERO */
+.hero { text-align: center; padding: 60px 0 32px; }
+.hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--green); margin-bottom: 16px; opacity:0; animation: fadeUp .6s ease forwards .1s; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 58px); font-weight: 900; line-height: 1.05; background: linear-gradient(135deg, var(--text) 0%, var(--green) 50%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; opacity:0; animation: fadeUp .6s ease forwards .2s; }
+.hero-details { display: flex; justify-content: center; gap: 28px; flex-wrap: wrap; opacity:0; animation: fadeUp .6s ease forwards .3s; }
+.hero-detail { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text2); }
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+/* COST SUMMARY BAR */
+.cost-bar { display: flex; gap: 16px; margin: 32px 0 16px; flex-wrap: wrap; opacity:0; animation: fadeUp .6s ease forwards .35s; }
+.cost-pill { flex: 1; min-width: 140px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; text-align: center; }
+.cost-pill-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+.cost-pill-value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: var(--green); }
+.cost-pill-value small { font-size: 12px; color: var(--text3); font-weight: 400; }
+.cost-pill-detail { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.cost-pill.total .cost-pill-value { color: var(--gold); }
+
+/* TABS */
+.tab-section { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 32px; opacity:0; animation: fadeUp .6s ease forwards .4s; }
+.tab-bar { display: flex; gap: 4px; background: rgba(255,255,255,0.03); border-radius: 14px; padding: 4px; border: 1px solid var(--border); margin-bottom: 32px; }
+.tab-btn { flex: 1; padding: 14px 20px; border: none; background: transparent; color: var(--text3); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: 10px; transition: all .3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.tab-btn:hover { color: var(--text2); background: rgba(255,255,255,0.03); }
+.tab-btn.active { background: var(--surface); color: var(--text); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.tab-btn .tab-icon { font-size: 18px; }
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn .3s ease; }
+
+/* SECTIONS */
+.section { margin-bottom: 40px; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--green-glow); border: 1px solid var(--border); flex-shrink: 0; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
+
+/* CARD */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: border-color .3s; }
+.card:hover { border-color: var(--border-b); }
+.card-body { padding: 24px; }
+
+/* SCHEDULE */
+.schedule-day { margin-bottom: 20px; }
+.schedule-day:last-child { margin-bottom: 0; }
+.day-header { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.tee-time { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.tee-time:last-child { border-bottom: none; }
+.tee-time-badge { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: var(--text); background: var(--surface); padding: 5px 10px; border-radius: 8px; min-width: 76px; text-align: center; }
+.tee-time-badge.pm { background: rgba(251,191,36,0.1); color: var(--gold); }
+.course-name { font-size: 15px; font-weight: 600; color: var(--text); flex: 1; }
+.course-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 6px; }
+.tag-am { background: rgba(74,222,128,0.1); color: var(--green); }
+.tag-pm { background: rgba(251,191,36,0.1); color: var(--gold); }
+
+/* INFO GRID */
+.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.info-block { background: var(--surface); border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.info-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+.info-value { font-size: 14px; color: var(--text); font-weight: 500; line-height: 1.5; }
+.info-value a { color: var(--green); text-decoration: none; }
+.info-value a:hover { text-decoration: underline; }
+
+/* PAYMENT BREAKDOWN TABLE */
+.payment-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.payment-table th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); text-align: left; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.payment-table td { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 14px; color: var(--text2); }
+.payment-table tr:last-child td { border-bottom: none; }
+.payment-table .date-cell { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text); font-weight: 500; }
+.payment-table .amount-cell { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-align: right; }
+.payment-table .pp-cell { font-family: 'JetBrains Mono', monospace; text-align: right; color: var(--text3); font-size: 13px; }
+.payment-table .total-row td { border-top: 2px solid var(--border); color: var(--text); font-weight: 700; padding-top: 16px; }
+.payment-table .total-row .amount-cell { color: var(--green); font-size: 16px; }
+
+.status-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 8px; border-radius: 6px; letter-spacing: .5px; }
+.status-upcoming { background: rgba(251,191,36,0.1); color: var(--gold); }
+.status-due { background: rgba(239,68,68,0.1); color: #f87171; }
+
+/* ROOMS */
+.rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 12px; }
+.room-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.room-floor { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+.room-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.room-detail { font-size: 12px; color: var(--text2); }
+
+/* FEATURES */
+.features-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 6px; margin-top: 12px; }
+.feature-item { font-size: 13px; color: var(--text2); padding: 5px 0; display: flex; align-items: center; gap: 8px; }
+.feature-check { color: var(--green); font-size: 13px; flex-shrink: 0; }
+
+/* PROTOCOLS */
+.protocol-list { list-style: none; margin-top: 8px; }
+.protocol-list li { font-size: 14px; color: var(--text2); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.protocol-list li:last-child { border-bottom: none; }
+.protocol-icon { color: var(--gold); font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+/* VENMO */
+.venmo-card { background: linear-gradient(135deg, #0074de 0%, #005bb5 100%); border: none; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+.venmo-icon { font-size: 32px; }
+.venmo-info { flex: 1; min-width: 200px; }
+.venmo-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
+.venmo-handle { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: #fff; }
+.venmo-note { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+/* LINKS */
+.links-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.link-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--green); text-decoration: none; font-size: 13px; font-weight: 500; transition: all .3s; }
+.link-btn:hover { border-color: var(--green); background: var(--green-glow); }
+
+/* FOOTER */
+.footer { text-align: center; padding: 40px 0 60px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); margin-top: 20px; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 600px) {
+  .hero-details { gap: 14px; }
+  .tee-time { flex-wrap: wrap; gap: 8px; }
+  .cost-bar { flex-direction: column; }
+  .venmo-card { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-eyebrow">It's Booked</div>
+    <h1>Myrtle Beach<br>Golf Trip 2026</h1>
+    <div class="hero-details">
+      <div class="hero-detail"><span class="hero-dot"></span> 8 Players</div>
+      <div class="hero-detail"><span class="hero-dot"></span> Sept 9–13, 2026</div>
+      <div class="hero-detail"><span class="hero-dot"></span> 6 Rounds · 3 Days</div>
+      <div class="hero-detail"><span class="hero-dot"></span> Pawleys Island, SC</div>
+    </div>
+  </header>
+
+  <!-- COST SUMMARY -->
+  <div class="cost-bar">
+    <div class="cost-pill">
+      <div class="cost-pill-label">Golf</div>
+      <div class="cost-pill-value">$766.12 <small>/pp</small></div>
+      <div class="cost-pill-detail">6 rounds · Caledonia Golf Vacations</div>
+    </div>
+    <div class="cost-pill">
+      <div class="cost-pill-label">House</div>
+      <div class="cost-pill-value">$313.88 <small>/pp</small></div>
+      <div class="cost-pill-detail">4 nights · Tipsy Turtle</div>
+    </div>
+    <div class="cost-pill total">
+      <div class="cost-pill-label">Total Per Person</div>
+      <div class="cost-pill-value">$1,080.00 <small>/pp</small></div>
+      <div class="cost-pill-detail">Golf + House combined</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-section">
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="golf"><span class="tab-icon">&#9971;</span> Golf</button>
+      <button class="tab-btn" data-tab="house"><span class="tab-icon">&#127968;</span> House</button>
+    </div>
+
+    <!-- =================== GOLF TAB =================== -->
+    <div class="tab-content active" id="tab-golf">
+
+      <!-- Payment Breakdown -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128176;</div>
+          <h2 class="section-title">Payment Breakdown</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <table class="payment-table">
+            <thead><tr><th>Due Date</th><th>Description</th><th style="text-align:right">Total</th><th style="text-align:right">Per Person</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="date-cell">May 28, 2026 <span class="status-badge status-upcoming">UPCOMING</span></td>
+                <td>Deposit</td>
+                <td class="amount-cell" style="color:var(--green)">$400.00</td>
+                <td class="pp-cell">$50.00</td>
+              </tr>
+              <tr>
+                <td class="date-cell">Aug 27, 2026</td>
+                <td>Remaining Balance</td>
+                <td class="amount-cell" style="color:var(--green)">$5,728.96</td>
+                <td class="pp-cell">$716.12</td>
+              </tr>
+              <tr class="total-row">
+                <td></td>
+                <td>Total</td>
+                <td class="amount-cell">$6,128.96</td>
+                <td class="pp-cell" style="color:var(--green); font-weight:700; font-size:14px;">$766.12</td>
+              </tr>
+            </tbody>
+          </table>
+        </div></div>
+      </div>
+
+      <!-- Schedule -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128197;</div>
+          <h2 class="section-title">Tee Times</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div class="schedule-day">
+            <div class="day-header">Thursday, September 10</div>
+            <div class="tee-time"><span class="tee-time-badge">8:15 AM</span><span class="course-name">True Blue Golf Club</span><span class="course-tag tag-am">AM</span></div>
+            <div class="tee-time"><span class="tee-time-badge pm">2:00 PM</span><span class="course-name">Caledonia Golf &amp; Fish Club</span><span class="course-tag tag-pm">PM</span></div>
+          </div>
+          <div class="schedule-day">
+            <div class="day-header">Friday, September 11</div>
+            <div class="tee-time"><span class="tee-time-badge">8:32 AM</span><span class="course-name">Tradition Club</span><span class="course-tag tag-am">AM</span></div>
+            <div class="tee-time"><span class="tee-time-badge pm">2:22 PM</span><span class="course-name">Willbrook Plantation</span><span class="course-tag tag-pm">PM</span></div>
+          </div>
+          <div class="schedule-day">
+            <div class="day-header">Saturday, September 12</div>
+            <div class="tee-time"><span class="tee-time-badge">8:41 AM</span><span class="course-name">Founders Club at Pawleys Island</span><span class="course-tag tag-am">AM</span></div>
+            <div class="tee-time"><span class="tee-time-badge pm">2:47 PM</span><span class="course-name">Pawleys Plantation</span><span class="course-tag tag-pm">PM</span></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Details -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128196;</div>
+          <h2 class="section-title">Details</h2>
+        </div>
+        <div class="info-grid">
+          <div class="info-block"><div class="info-label">Check-In</div><div class="info-value">Use last name at each pro shop. No vouchers needed.</div></div>
+          <div class="info-block"><div class="info-label">Arrive</div><div class="info-value">30 min before tee time, checked in and ready to play.</div></div>
+          <div class="info-block"><div class="info-label">Reservation</div><div class="info-value">Caledonia Golf Vacations<br>Res #13399904</div></div>
+          <div class="info-block"><div class="info-label">Guest Portal</div><div class="info-value"><a href="https://caledonia.teetimecentralonline.com/golfcentral/Guests/?p=&amp;i=14620624-6fe1-487a-b68b-67fce0a64e80&amp;s=18dd8ef9-013c-4370-a531-f5b09f6550f6" target="_blank">View Reservation &#8599;</a></div></div>
+        </div>
+      </div>
+
+      <!-- Good to Know -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#9888;&#65039;</div>
+          <h2 class="section-title">Good to Know</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <ul class="protocol-list">
+            <li><span class="protocol-icon">&#128337;</span> Be at the pro shop <strong style="color:var(--text)">30 minutes</strong> before your tee time, checked in and ready.</li>
+            <li><span class="protocol-icon">&#9748;</span> Each course has its own weather policy. Call the course directly if weather is bad.</li>
+            <li><span class="protocol-icon">&#128101;</span> Groups under 4 in a tee time may be paired up to make a foursome.</li>
+            <li><span class="protocol-icon">&#10060;</span> Cancel 14 days before arrival for a full refund.</li>
+            <li><span class="protocol-icon">&#9888;</span> Address any concerns with course staff <strong style="color:var(--text)">before leaving</strong> — can't be resolved after.</li>
+          </ul>
+        </div></div>
+      </div>
+
+    </div>
+
+    <!-- =================== HOUSE TAB =================== -->
+    <div class="tab-content" id="tab-house">
+
+      <!-- Payment -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128176;</div>
+          <h2 class="section-title">Payment</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <table class="payment-table">
+            <thead><tr><th>Payee</th><th>Description</th><th style="text-align:right">Total</th><th style="text-align:right">Per Person</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="date-cell">Jake Struss</td>
+                <td>Airbnb — Tipsy Turtle (4 nights)</td>
+                <td class="amount-cell" style="color:var(--green)">$2,511.00</td>
+                <td class="pp-cell">$313.88</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="venmo-card">
+            <div class="venmo-icon">&#128179;</div>
+            <div class="venmo-info">
+              <div class="venmo-label">Venmo Jake</div>
+              <div class="venmo-handle">@jake-struss</div>
+              <div class="venmo-note">Send $313.88 · Note: "MB golf trip house"</div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Property -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#127965;</div>
+          <h2 class="section-title">The Property</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:700; margin-bottom:4px;">Tipsy Turtle</h3>
+              <div style="font-size:13px; color:var(--text2);">827B North Waccamaw Dr, Murrells Inlet, SC 29576</div>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--gold);">&#9733; 4.79</span>
+              <span style="font-size:11px; color:var(--text3);">(91 reviews)</span>
+            </div>
+          </div>
+          <div class="info-grid">
+            <div class="info-block"><div class="info-label">Check-In</div><div class="info-value">Wed, Sept 9 · 4:00 PM<br>Self check-in via keypad</div></div>
+            <div class="info-block"><div class="info-label">Checkout</div><div class="info-value">Sun, Sept 13 · 10:00 AM</div></div>
+            <div class="info-block"><div class="info-label">Confirmation</div><div class="info-value" style="font-family:'JetBrains Mono',monospace;">HMFEW3WRJ5</div></div>
+            <div class="info-block"><div class="info-label">Parking</div><div class="info-value">Free · Up to 5 vehicles</div></div>
+          </div>
+          <div class="links-row">
+            <a href="https://www.airbnb.com/rooms/708211388941105572" target="_blank" class="link-btn">&#127968; View on Airbnb &#8599;</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=33.58331905567876%2C-78.99341784417629" target="_blank" class="link-btn">&#128205; Directions &#8599;</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Rooms -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128716;</div>
+          <h2 class="section-title">Rooms</h2>
+        </div>
+        <div class="rooms-grid">
+          <div class="room-card"><div class="room-floor">Ground</div><div class="room-name">Pool &amp; Grill</div><div class="room-detail">Private pool (unheated) · Charcoal grill</div></div>
+          <div class="room-card"><div class="room-floor">1st Floor</div><div class="room-name">Master</div><div class="room-detail">King bed · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 2</div><div class="room-detail">King bed · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 3</div><div class="room-detail">2 bunk beds (twin/full) · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 4</div><div class="room-detail">Queen bed · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 5</div><div class="room-detail">Queen bed · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 6</div><div class="room-detail">2 Queen beds · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bonus</div><div class="room-detail">Ping pong table</div></div>
+        </div>
+      </div>
+
+      <!-- Amenities -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#10024;</div>
+          <h2 class="section-title">Amenities</h2>
+        </div>
+        <div class="features-list">
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Private pool</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Walk to beach</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Ocean-view balconies</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Full kitchen</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Free WiFi</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Smart TVs everywhere</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Washer &amp; dryer</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> BBQ grill (bring charcoal)</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Ping pong table</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> All ensuite bathrooms</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Linens &amp; towels</div>
+          <div class="feature-item"><span class="feature-check">&#10003;</span> Coffee maker</div>
+        </div>
+      </div>
+
+      <!-- Good to Know -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#9888;&#65039;</div>
+          <h2 class="section-title">Good to Know</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <ul class="protocol-list">
+            <li><span class="protocol-icon">&#128663;</span> Parking for up to <strong style="color:var(--text)">5 vehicles</strong>.</li>
+            <li><span class="protocol-icon">&#127828;</span> Bring your own charcoal for the grill.</li>
+            <li><span class="protocol-icon">&#127946;</span> Pool is <strong style="color:var(--text)">not heated</strong> and has no pool light.</li>
+            <li><span class="protocol-icon">&#128273;</span> Self check-in via keypad — no host meetup needed.</li>
+            <li><span class="protocol-icon">&#128336;</span> Check-in at <strong style="color:var(--text)">4:00 PM</strong>, checkout by <strong style="color:var(--text)">10:00 AM</strong>.</li>
+            <li><span class="protocol-icon">&#128290;</span> Elevator available for $150 — request in advance if needed.</li>
+          </ul>
+        </div></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">Myrtle Beach Golf Trip 2026 · Pawleys Island, SC · Sept 9–13</footer>
+</div>
+
+<script>
+(function() {
+  "use strict";
+  function init() {
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tab = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+        btn.classList.add('active');
+        var el = document.getElementById('tab-' + tab);
+        if (el) el.classList.add('active');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
