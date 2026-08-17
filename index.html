@@ -141,6 +141,40 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 /* FOOTER */
 .footer { text-align: center; padding: 40px 0 60px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text3); margin-top: 20px; }
 
+/* TOURNAMENT */
+.fmt-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.fmt-row:last-child { border-bottom: none; }
+.fmt-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: var(--text3); background: var(--surface); border-radius: 8px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fmt-main { flex: 1; min-width: 0; }
+.fmt-course { font-size: 14px; font-weight: 600; color: var(--text); }
+.fmt-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text3); margin-top: 2px; }
+.fmt-format { font-size: 13px; color: var(--text2); margin-top: 3px; }
+.fmt-pts { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 9px; border-radius: 6px; flex-shrink: 0; white-space: nowrap; }
+.pts-cup { background: rgba(251,191,36,0.1); color: var(--gold); }
+.pts-ind { background: rgba(74,222,128,0.1); color: var(--green); }
+
+.team-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: center; }
+.team-card.a { border-color: rgba(74,222,128,0.3); }
+.team-card.b { border-color: rgba(96,165,250,0.3); }
+.team-name { font-family: 'Source Serif 4', serif; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.team-cap { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+.team-roster { font-size: 14px; color: var(--text3); line-height: 2; }
+
+.scorebar { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 16px; flex-wrap: wrap; }
+.scorebar-item { text-align: center; }
+.scorebar-num { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 700; color: var(--gold); }
+.scorebar-lbl { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-top: 2px; }
+
+.pts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; margin-top: 12px; }
+.pts-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.pts-box-num { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 700; color: var(--green); }
+.pts-box-lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.rule-new { background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.2); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.rule-new:last-child { margin-bottom: 0; }
+.rule-tag { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.rule-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @media (max-width: 600px) {
@@ -200,6 +234,13 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .links-row { flex-direction: column; }
   .link-btn { justify-content: center; font-size: 13px; padding: 12px 16px; }
   .footer { padding: 32px 0 48px; font-size: 11px; }
+  .fmt-row { flex-wrap: wrap; gap: 10px; }
+  .fmt-num { width: 30px; height: 30px; font-size: 10px; }
+  .fmt-course { font-size: 13px; }
+  .fmt-format { font-size: 12px; }
+  .scorebar { gap: 14px; padding: 14px; }
+  .scorebar-num { font-size: 22px; }
+  .team-card { padding: 16px; }
   /* Tournament teams grid */
   div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
 }
@@ -214,8 +255,8 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
     <h1>The 2026 Inaugural<br>"It's Over"<br>Myrtle Beach Invitational</h1>
     <div class="hero-details">
       <div class="hero-detail"><span class="hero-dot"></span> 8 Players</div>
-      <div class="hero-detail"><span class="hero-dot"></span> Sept 9–13, 2026</div>
-      <div class="hero-detail"><span class="hero-dot"></span> 6 Rounds · 3 Days</div>
+      <div class="hero-detail"><span class="hero-dot"></span> Sept 9&ndash;13, 2026</div>
+      <div class="hero-detail"><span class="hero-dot"></span> 6 Rounds &middot; 3 Days</div>
       <div class="hero-detail"><span class="hero-dot"></span> Pawleys Island, SC</div>
     </div>
   </header>
@@ -225,12 +266,12 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
     <div class="cost-pill">
       <div class="cost-pill-label">Golf</div>
       <div class="cost-pill-value">$766.12 <small>/pp</small></div>
-      <div class="cost-pill-detail">6 rounds · Caledonia Golf Vacations</div>
+      <div class="cost-pill-detail">6 rounds &middot; Caledonia Golf Vacations</div>
     </div>
     <div class="cost-pill">
       <div class="cost-pill-label">House</div>
       <div class="cost-pill-value">$351.50 <small>/pp</small></div>
-      <div class="cost-pill-detail">4 nights · Tipsy Turtle</div>
+      <div class="cost-pill-detail">4 nights &middot; Tipsy Turtle</div>
     </div>
     <div class="cost-pill total">
       <div class="cost-pill-label">Total Per Person</div>
@@ -262,7 +303,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
             <tbody>
               <tr>
                 <td class="date-cell">May 28 <span class="status-badge" style="background:rgba(74,222,128,0.1); color:var(--green);">COVERED</span></td>
-                <td>Deposit — covered by Brad</td>
+                <td>Deposit &mdash; covered by Brad</td>
                 <td class="pp-cell" style="text-decoration:line-through; color:var(--text3);">$50.00</td>
               </tr>
               <tr>
@@ -402,7 +443,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
             <li><span class="protocol-icon">&#9748;</span> Each course has its own weather policy. Call the course directly if weather is bad.</li>
             <li><span class="protocol-icon">&#128101;</span> Groups under 4 in a tee time may be paired up to make a foursome.</li>
             <li><span class="protocol-icon">&#10060;</span> Cancel 14 days before arrival for a full refund.</li>
-            <li><span class="protocol-icon">&#9888;</span> Address any concerns with course staff <strong style="color:var(--text)">before leaving</strong> — can't be resolved after.</li>
+            <li><span class="protocol-icon">&#9888;</span> Address any concerns with course staff <strong style="color:var(--text)">before leaving</strong>. They can't be resolved after.</li>
           </ul>
         </div></div>
       </div>
@@ -447,7 +488,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
             <div class="venmo-info">
               <div class="venmo-label">Venmo Jake</div>
               <div class="venmo-handle">@jake-struss</div>
-              <div class="venmo-note">Send $351.50 · Note: "MB golf trip house" · Tap to open Venmo &#8599;</div>
+              <div class="venmo-note">Send $351.50 &middot; Note: "MB golf trip house" &middot; Tap to open Venmo &#8599;</div>
             </div>
           </a>
         </div></div>
@@ -471,10 +512,10 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
             </div>
           </div>
           <div class="info-grid">
-            <div class="info-block"><div class="info-label">Check-In</div><div class="info-value">Wed, Sept 9 · 4:00 PM<br>Self check-in via keypad</div></div>
-            <div class="info-block"><div class="info-label">Checkout</div><div class="info-value">Sun, Sept 13 · 10:00 AM</div></div>
+            <div class="info-block"><div class="info-label">Check-In</div><div class="info-value">Wed, Sept 9 &middot; 4:00 PM<br>Self check-in via keypad</div></div>
+            <div class="info-block"><div class="info-label">Checkout</div><div class="info-value">Sun, Sept 13 &middot; 10:00 AM</div></div>
             <div class="info-block"><div class="info-label">Confirmation</div><div class="info-value" style="font-family:'IBM Plex Mono',monospace;">HMFEW3WRJ5</div></div>
-            <div class="info-block"><div class="info-label">Parking</div><div class="info-value">Free · Up to 5 vehicles</div></div>
+            <div class="info-block"><div class="info-label">Parking</div><div class="info-value">Free &middot; Up to 5 vehicles</div></div>
           </div>
           <div class="links-row">
             <a href="https://www.airbnb.com/rooms/708211388941105572" target="_blank" class="link-btn">&#127968; View on Airbnb &#8599;</a>
@@ -490,13 +531,13 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
           <h2 class="section-title">Rooms</h2>
         </div>
         <div class="rooms-grid">
-          <div class="room-card"><div class="room-floor">Ground</div><div class="room-name">Pool &amp; Grill</div><div class="room-detail">Private pool (unheated) · Charcoal grill</div></div>
-          <div class="room-card"><div class="room-floor">1st Floor</div><div class="room-name">Master</div><div class="room-detail">King bed · Full bath</div></div>
-          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 2</div><div class="room-detail">King bed · Full bath</div></div>
-          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 3</div><div class="room-detail">2 bunk beds (twin/full) · Full bath</div></div>
-          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 4</div><div class="room-detail">Queen bed · Full bath</div></div>
-          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 5</div><div class="room-detail">Queen bed · Full bath</div></div>
-          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 6</div><div class="room-detail">2 Queen beds · Full bath</div></div>
+          <div class="room-card"><div class="room-floor">Ground</div><div class="room-name">Pool &amp; Grill</div><div class="room-detail">Private pool (unheated) &middot; Charcoal grill</div></div>
+          <div class="room-card"><div class="room-floor">1st Floor</div><div class="room-name">Master</div><div class="room-detail">King bed &middot; Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 2</div><div class="room-detail">King bed &middot; Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 3</div><div class="room-detail">2 bunk beds (twin/full) &middot; Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 4</div><div class="room-detail">Queen bed &middot; Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 5</div><div class="room-detail">Queen bed &middot; Full bath</div></div>
+          <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bedroom 6</div><div class="room-detail">2 Queen beds &middot; Full bath</div></div>
           <div class="room-card"><div class="room-floor">2nd Floor</div><div class="room-name">Bonus</div><div class="room-detail">Ping pong table</div></div>
         </div>
       </div>
@@ -534,9 +575,9 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
             <li><span class="protocol-icon">&#128663;</span> Parking for up to <strong style="color:var(--text)">5 vehicles</strong>.</li>
             <li><span class="protocol-icon">&#127828;</span> Bring your own charcoal for the grill.</li>
             <li><span class="protocol-icon">&#127946;</span> Pool is <strong style="color:var(--text)">not heated</strong> and has no pool light.</li>
-            <li><span class="protocol-icon">&#128273;</span> Self check-in via keypad — no host meetup needed.</li>
+            <li><span class="protocol-icon">&#128273;</span> Self check-in via keypad. No host meetup needed.</li>
             <li><span class="protocol-icon">&#128336;</span> Check-in at <strong style="color:var(--text)">4:00 PM</strong>, checkout by <strong style="color:var(--text)">10:00 AM</strong>.</li>
-            <li><span class="protocol-icon">&#128290;</span> Elevator available for $150 — request in advance if needed.</li>
+            <li><span class="protocol-icon">&#128290;</span> Elevator available for $150. Request in advance if needed.</li>
           </ul>
         </div></div>
       </div>
@@ -546,94 +587,317 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
     <!-- =================== TOURNAMENT TAB =================== -->
     <div class="tab-content" id="tab-tournament">
 
-      <!-- Handicaps -->
+      <!-- Format at a Glance -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128203;</div>
+          <h2 class="section-title">Format at a Glance</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div class="fmt-row">
+            <div class="fmt-num">R1</div>
+            <div class="fmt-main">
+              <div class="fmt-course">True Blue Golf Club</div>
+              <div class="fmt-meta">THU AM</div>
+              <div class="fmt-format">Individual Stableford + Skins</div>
+            </div>
+            <span class="fmt-pts pts-ind">Individual</span>
+          </div>
+          <div class="fmt-row">
+            <div class="fmt-num">R2</div>
+            <div class="fmt-main">
+              <div class="fmt-course">Caledonia Golf &amp; Fish Club</div>
+              <div class="fmt-meta">THU PM</div>
+              <div class="fmt-format">2-Man Scramble &middot; 2 matches</div>
+            </div>
+            <span class="fmt-pts pts-cup">2 pts</span>
+          </div>
+          <div class="fmt-row">
+            <div class="fmt-num">R3</div>
+            <div class="fmt-main">
+              <div class="fmt-course">Tradition Club</div>
+              <div class="fmt-meta">FRI AM</div>
+              <div class="fmt-format">Individual Stableford + Skins</div>
+            </div>
+            <span class="fmt-pts pts-ind">Individual</span>
+          </div>
+          <div class="fmt-row">
+            <div class="fmt-num">R4</div>
+            <div class="fmt-main">
+              <div class="fmt-course">Willbrook Plantation</div>
+              <div class="fmt-meta">FRI PM</div>
+              <div class="fmt-format">Four-Ball &middot; 2 matches</div>
+            </div>
+            <span class="fmt-pts pts-cup">2 pts</span>
+          </div>
+          <div class="fmt-row">
+            <div class="fmt-num">R5</div>
+            <div class="fmt-main">
+              <div class="fmt-course">Founders Club at Pawleys Island</div>
+              <div class="fmt-meta">SAT AM</div>
+              <div class="fmt-format">Singles Match Play &middot; 4 matches<br>+ Individual Stableford + Skins</div>
+            </div>
+            <span class="fmt-pts pts-cup">4 pts</span>
+          </div>
+          <div class="fmt-row">
+            <div class="fmt-num">R6</div>
+            <div class="fmt-main">
+              <div class="fmt-course">Pawleys Plantation</div>
+              <div class="fmt-meta">SAT PM</div>
+              <div class="fmt-format">4-Man Scramble &middot; anchor match</div>
+            </div>
+            <span class="fmt-pts pts-cup">4 pts</span>
+          </div>
+          <div style="font-size:12px; color:var(--text3); margin-top:14px; line-height:1.6; border-top:1px solid var(--border); padding-top:14px;">
+            Round 5 does double duty. It counts for the Cup <em>and</em> closes out the individual.
+            Round 6 carries extra weight so the Cup stays alive into Saturday afternoon.
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Ryder Cup -->
       <div class="section">
         <div class="section-header">
           <div class="section-icon">&#127942;</div>
+          <h2 class="section-title">The Ryder Cup</h2>
+        </div>
+
+        <div class="scorebar">
+          <div class="scorebar-item">
+            <div class="scorebar-num">12</div>
+            <div class="scorebar-lbl">Points Available</div>
+          </div>
+          <div class="scorebar-item">
+            <div class="scorebar-num">6.5</div>
+            <div class="scorebar-lbl">To Win the Cup</div>
+          </div>
+          <div class="scorebar-item">
+            <div class="scorebar-num">4</div>
+            <div class="scorebar-lbl">Per Side</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:16px;">
+          <div class="team-card a">
+            <div class="team-cap">Captain</div>
+            <div class="team-name">Colin Shields</div>
+            <div class="info-label" style="margin:8px 0 12px;">Team Adrienne</div>
+            <div class="team-roster">
+              <div>TBD</div><div>TBD</div><div>TBD</div>
+            </div>
+          </div>
+          <div class="team-card b">
+            <div class="team-cap">Captain</div>
+            <div class="team-name">TBD</div>
+            <div class="info-label" style="margin:8px 0 12px;">Team Erin</div>
+            <div class="team-roster">
+              <div>TBD</div><div>TBD</div><div>TBD</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card"><div class="card-body">
+          <ul class="protocol-list">
+            <li><span class="protocol-icon">&#127942;</span> <strong style="color:var(--text)">Colin Shields</strong> captains Team Adrienne as last year's individual champion.</li>
+            <li><span class="protocol-icon">&#127920;</span> Team Erin's captain is decided by <strong style="color:var(--text)">spinning the wheel Wednesday night</strong> once we're all in Myrtle.</li>
+            <li><span class="protocol-icon">&#128203;</span> Rosters are drafted live on arrival. Nothing is locked until the draft.</li>
+            <li><span class="protocol-icon">&#9878;</span> A halved match splits the point. At <strong style="color:var(--text)">6-6</strong> the Cup is retained by the defending side.</li>
+            <li><span class="protocol-icon">&#128200;</span> The Cup cannot be clinched before Saturday afternoon. It comes down to Pawleys Plantation.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <!-- Individual Stableford -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#9971;</div>
+          <h2 class="section-title">Individual Stableford</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div style="font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:6px;">
+            Played across all three morning rounds. <strong style="color:var(--text);">100% of handicap</strong>,
+            applied relative to the lowest handicap in the field.
+          </div>
+          <div style="font-size:13px; color:var(--text3); line-height:1.7;">
+            Example: Mike is a 5.0 and Brad is a 17.8. Brad gets 13 strokes on handicap holes 1 through 13. Mike plays scratch.
+          </div>
+          <div class="pts-grid">
+            <div class="pts-box"><div class="pts-box-num">0</div><div class="pts-box-lbl">Double or worse</div></div>
+            <div class="pts-box"><div class="pts-box-num">1</div><div class="pts-box-lbl">Bogey</div></div>
+            <div class="pts-box"><div class="pts-box-num">2</div><div class="pts-box-lbl">Par</div></div>
+            <div class="pts-box"><div class="pts-box-num">3</div><div class="pts-box-lbl">Birdie</div></div>
+            <div class="pts-box"><div class="pts-box-num">4</div><div class="pts-box-lbl">Eagle</div></div>
+            <div class="pts-box"><div class="pts-box-num">5</div><div class="pts-box-lbl">Double eagle</div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Skins -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128176;</div>
+          <h2 class="section-title">Skins</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <ul class="protocol-list" style="margin-top:0;">
+            <li><span class="protocol-icon">&#9989;</span> Net scores, but a <strong style="color:var(--text)">gross birdie beats a net birdie</strong>.</li>
+            <li><span class="protocol-icon">&#10062;</span> Ties are a push. No skin awarded, no carryover.</li>
+            <li><span class="protocol-icon">&#128197;</span> Cumulative across all three individual rounds.</li>
+          </ul>
+          <div style="margin-top:14px; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px;">
+            <div class="info-label" style="margin-bottom:8px;">How the Payout Works</div>
+            <div style="font-size:13px; color:var(--text2); line-height:1.8;">
+              Say 34 skins are won across the three rounds.<br>
+              $200 &divide; 34 = <strong style="color:var(--green);">$5.88 per skin</strong><br>
+              Win 5 skins and you collect $29.40.
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Handicap Allowances -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128207;</div>
+          <h2 class="section-title">Handicap Allowances</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div style="font-size:13px; color:var(--text3); margin-bottom:16px;">
+            All allowances follow USGA recommendations for each format.
+          </div>
+          <table class="payment-table">
+            <thead><tr><th>Format</th><th style="text-align:right">Allowance</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="date-cell">Individual Stableford<div style="font-family:'Inter',sans-serif; font-size:12px; color:var(--text3); font-weight:400; margin-top:2px;">Rounds 1, 3, 5</div></td>
+                <td class="amount-cell" style="color:var(--green)">100%</td>
+              </tr>
+              <tr>
+                <td class="date-cell">2-Man Scramble<div style="font-family:'Inter',sans-serif; font-size:12px; color:var(--text3); font-weight:400; margin-top:2px;">35% low + 15% high</div></td>
+                <td class="amount-cell" style="color:var(--green)">35 / 15</td>
+              </tr>
+              <tr>
+                <td class="date-cell">Four-Ball<div style="font-family:'Inter',sans-serif; font-size:12px; color:var(--text3); font-weight:400; margin-top:2px;">Strokes off the low player in the match</div></td>
+                <td class="amount-cell" style="color:var(--green)">90%</td>
+              </tr>
+              <tr>
+                <td class="date-cell">Singles<div style="font-family:'Inter',sans-serif; font-size:12px; color:var(--text3); font-weight:400; margin-top:2px;">Of the difference between the two players</div></td>
+                <td class="amount-cell" style="color:var(--green)">100%</td>
+              </tr>
+              <tr>
+                <td class="date-cell">4-Man Scramble<div style="font-family:'Inter',sans-serif; font-size:12px; color:var(--text3); font-weight:400; margin-top:2px;">Applied lowest handicap to highest</div></td>
+                <td class="amount-cell" style="color:var(--green)">25 / 20 / 15 / 10</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="font-size:12px; color:var(--text3); margin-top:14px; line-height:1.6;">
+            In every team match the lower team plays scratch and the higher team receives the difference.
+            Course handicaps adjust by rating and slope, so you may get more strokes on a tougher course and fewer on an easier one.
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Buy-In & Payouts -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#127942;</div>
+          <h2 class="section-title">Buy-In &amp; Payouts</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div class="cost-bar" style="margin:0 0 20px; animation:none; opacity:1;">
+            <div class="cost-pill">
+              <div class="cost-pill-label">Buy-In</div>
+              <div class="cost-pill-value">$100 <small>/pp</small></div>
+            </div>
+            <div class="cost-pill total">
+              <div class="cost-pill-label">Total Pool</div>
+              <div class="cost-pill-value">$800</div>
+            </div>
+          </div>
+          <table class="payment-table">
+            <thead><tr><th>Pot</th><th>Split</th><th style="text-align:right">Amount</th></tr></thead>
+            <tbody>
+              <tr><td class="date-cell">Individual</td><td>1st place &middot; 50%</td><td class="amount-cell" style="color:var(--green)">$200</td></tr>
+              <tr><td class="date-cell"></td><td>2nd place &middot; 30%</td><td class="amount-cell" style="color:var(--green)">$120</td></tr>
+              <tr><td class="date-cell"></td><td>3rd place &middot; 20%</td><td class="amount-cell" style="color:var(--green)">$80</td></tr>
+              <tr><td class="date-cell">Ryder Cup</td><td>Split among the winning side</td><td class="amount-cell" style="color:var(--green)">$200</td></tr>
+              <tr><td class="date-cell">Skins</td><td>Divided by total skins won</td><td class="amount-cell" style="color:var(--green)">$200</td></tr>
+              <tr class="total-row"><td></td><td>Total</td><td class="amount-cell">$800</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+      </div>
+
+      <!-- Rules -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128220;</div>
+          <h2 class="section-title">Rules</h2>
+        </div>
+        <div class="card"><div class="card-body">
+          <div class="rule-new">
+            <div class="rule-tag">New This Year</div>
+            <div class="rule-text">
+              <strong style="color:var(--text);">No gimmies on par or birdie putts.</strong>
+              Anything for par or better has to be holed out. Bogey or worse, the group can give it.
+            </div>
+          </div>
+          <div class="rule-new">
+            <div class="rule-tag">New This Year</div>
+            <div class="rule-text">
+              <strong style="color:var(--text);">Improved lies.</strong>
+              One club length, no closer to the hole, and you cannot move the ball from rough to fairway.
+              Same cut of grass you found it in.
+            </div>
+          </div>
+          <div class="rule-new" style="background:rgba(239,68,68,0.06); border-color:rgba(239,68,68,0.2);">
+            <div class="rule-tag" style="color:#f87171;">Round 5 Only</div>
+            <div class="rule-text">
+              <strong style="color:var(--text);">No concessions of any kind.</strong>
+              Holes cannot be conceded and matches cannot be closed out early. Round 5 is also the final
+              round of the individual, so everyone plays all 18 and holes out even if the match is already won.
+              Your stableford points are live to the last putt.
+            </div>
+          </div>
+          <ul class="protocol-list" style="margin-top:16px;">
+            <li><span class="protocol-icon">&#128683;</span> Max hole score is a <strong style="color:var(--text)">gross triple bogey</strong>.</li>
+            <li><span class="protocol-icon">&#128200;</span> Handicaps are pulled from <strong style="color:var(--text)">GHIN</strong>, <strong style="color:var(--text)">18Birdies</strong>, or assigned from previous trip rounds.</li>
+            <li><span class="protocol-icon">&#128241;</span> All scoring runs through <strong style="color:var(--text)">Squabbit</strong>. Join the tournament before we tee off Thursday.</li>
+            <li><span class="protocol-icon">&#128101;</span> Pairings are set so everyone plays with everyone as much as the numbers allow. Some teammate overlap is unavoidable with 8 players.</li>
+          </ul>
+        </div></div>
+      </div>
+
+      <!-- Trip Handicaps -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-icon">&#128202;</div>
           <h2 class="section-title">Trip Handicaps</h2>
         </div>
         <div class="card"><div class="card-body">
           <table class="payment-table">
             <thead><tr><th>Player</th><th>Handicap</th><th style="text-align:right">Source</th></tr></thead>
             <tbody>
-              <tr><td class="date-cell">Mike McCormick &#11088;</td><td class="amount-cell" style="text-align:left; color:var(--green);">5.8</td><td class="pp-cell">Current GHIN</td></tr>
-              <tr><td class="date-cell">Jake Struss &#11088;</td><td class="amount-cell" style="text-align:left; color:var(--green);">10.5</td><td class="pp-cell">18Birdies</td></tr>
-              <tr><td class="date-cell">Colin Shields</td><td class="amount-cell" style="text-align:left; color:var(--green);">15.3</td><td class="pp-cell">18Birdies</td></tr>
-              <tr><td class="date-cell">Joe Fawley</td><td class="amount-cell" style="text-align:left; color:var(--green);">17.0</td><td class="pp-cell">Assigned</td></tr>
+              <tr><td class="date-cell">Mike McCormick</td><td class="amount-cell" style="text-align:left; color:var(--green);">5.0</td><td class="pp-cell">Current GHIN</td></tr>
+              <tr><td class="date-cell">Jake Struss</td><td class="amount-cell" style="text-align:left; color:var(--green);">11.2</td><td class="pp-cell">18Birdies</td></tr>
+              <tr><td class="date-cell">Colin Shields &#127942;</td><td class="amount-cell" style="text-align:left; color:var(--green);">15.3</td><td class="pp-cell">18Birdies</td></tr>
+              <tr><td class="date-cell">Joe Fawley</td><td class="amount-cell" style="text-align:left; color:var(--green);">15.5</td><td class="pp-cell">18Birdies</td></tr>
               <tr><td class="date-cell">Brad Yeakle</td><td class="amount-cell" style="text-align:left; color:var(--green);">17.8</td><td class="pp-cell">Current GHIN</td></tr>
-              <tr><td class="date-cell">Hunter Nalley</td><td class="amount-cell" style="text-align:left; color:var(--green);">18.0</td><td class="pp-cell">Assigned</td></tr>
-              <tr><td class="date-cell">Cody Wenner</td><td class="amount-cell" style="text-align:left; color:var(--green);">18.6</td><td class="pp-cell">18Birdies</td></tr>
-              <tr><td class="date-cell">Luke Struss</td><td class="amount-cell" style="text-align:left; color:var(--green);">26.0</td><td class="pp-cell">Assigned</td></tr>
+              <tr><td class="date-cell">Hunter Nalley</td><td class="amount-cell" style="text-align:left; color:var(--green);">19.0</td><td class="pp-cell">Assigned</td></tr>
+              <tr><td class="date-cell">Luke Struss</td><td class="amount-cell" style="text-align:left; color:var(--green);">20.7</td><td class="pp-cell">18Birdies</td></tr>
+              <tr><td class="date-cell">Cody Wenner</td><td class="amount-cell" style="text-align:left; color:var(--green);">20.9</td><td class="pp-cell">18Birdies</td></tr>
             </tbody>
           </table>
-          <div style="font-size:12px; color:var(--text3); margin-top:12px;">&#11088; = Team Captain</div>
+          <div style="font-size:12px; color:var(--text3); margin-top:12px;">&#127942; = Defending individual champion and Team Adrienne captain</div>
         </div></div>
       </div>
 
-      <!-- Teams -->
+      <!-- Squabbit Link -->
       <div class="section">
-        <div class="section-header">
-          <div class="section-icon">&#129309;</div>
-          <h2 class="section-title">Teams</h2>
-        </div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
-          <div class="card"><div class="card-body" style="text-align:center;">
-            <div class="info-label" style="margin-bottom:8px;">Team McCormick</div>
-            <div style="font-family:'Source Serif 4',serif; font-size:20px; font-weight:700; margin-bottom:12px;">Mike McCormick</div>
-            <div style="font-size:14px; color:var(--text3); line-height:2;">
-              <div style="color:var(--text2);">TBD</div>
-              <div style="color:var(--text2);">TBD</div>
-              <div style="color:var(--text2);">TBD</div>
-            </div>
-          </div></div>
-          <div class="card"><div class="card-body" style="text-align:center;">
-            <div class="info-label" style="margin-bottom:8px;">Team Struss</div>
-            <div style="font-family:'Source Serif 4',serif; font-size:20px; font-weight:700; margin-bottom:12px;">Jake Struss</div>
-            <div style="font-size:14px; color:var(--text3); line-height:2;">
-              <div style="color:var(--text2);">TBD</div>
-              <div style="color:var(--text2);">TBD</div>
-              <div style="color:var(--text2);">TBD</div>
-            </div>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- Tournament Format -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon">&#128203;</div>
-          <h2 class="section-title">Tournament Format</h2>
-        </div>
         <div class="card"><div class="card-body">
-          <div class="info-grid" style="margin-bottom:20px;">
-            <div class="info-block">
-              <div class="info-label">Individual</div>
-              <div class="info-value">Net Stableford across all morning rounds.</div>
-            </div>
-            <div class="info-block">
-              <div class="info-label">Team</div>
-              <div class="info-value">Team scrambles in the afternoon. Likely 2v2 again so everyone plays with different people each day.</div>
-            </div>
-          </div>
-          <div class="links-row">
+          <div class="links-row" style="margin-top:0;">
             <a href="https://app.squabbitgolf.com/tournament?inviteCode=CXOLRC" target="_blank" class="link-btn" style="flex:1; justify-content:center; font-size:15px; padding:14px 24px; background:rgba(74,222,128,0.08); border-color:rgba(74,222,128,0.3);">&#9971; View Tournament on Squabbit &#8599;</a>
           </div>
-        </div></div>
-      </div>
-
-      <!-- Good to Know -->
-      <div class="section">
-        <div class="section-header">
-          <div class="section-icon">&#9888;&#65039;</div>
-          <h2 class="section-title">Good to Know</h2>
-        </div>
-        <div class="card"><div class="card-body">
-          <ul class="protocol-list">
-            <li><span class="protocol-icon">&#128203;</span> Teams will be drafted by captains <strong style="color:var(--text)">Mike McCormick</strong> and <strong style="color:var(--text)">Jake Struss</strong> — the two lowest handicaps.</li>
-            <li><span class="protocol-icon">&#128200;</span> Handicaps are pulled from <strong style="color:var(--text)">GHIN</strong>, <strong style="color:var(--text)">18Birdies</strong>, or assigned based on previous trip rounds.</li>
-            <li><span class="protocol-icon">&#128241;</span> All scoring tracked through <strong style="color:var(--text)">Squabbit</strong> — make sure you join the tournament before we tee off.</li>
-            <li><span class="protocol-icon">&#127942;</span> Individual and team awards — bragging rights for the year.</li>
-          </ul>
         </div></div>
       </div>
 
@@ -641,7 +905,7 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 
   </div>
 
-  <footer class="footer">Myrtle Beach Golf Trip 2026 · Pawleys Island, SC · Sept 9–13</footer>
+  <footer class="footer">Myrtle Beach Golf Trip 2026 &middot; Pawleys Island, SC &middot; Sept 9&ndash;13</footer>
 </div>
 
 <script>
